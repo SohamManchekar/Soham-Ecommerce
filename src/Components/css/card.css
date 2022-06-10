@@ -1,0 +1,177 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.card-body{
+    width: 340px;
+    height: 410px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    cursor: pointer;
+}
+.card-layout{
+    width: 340px;
+    height: 410px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.card-banner{
+    width: 350px;
+    height: 410px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.card-banner-display{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.card-banner-det{
+    width: 45%;
+    height: 40%;
+    margin: 15px 8px 0 8px;
+}
+.card-banner-det img{
+    width: 100%;
+    height: 75%;
+    cursor: pointer;
+}
+.card-banner-det p{
+    text-align: left;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: black;
+}
+.card-sign-layout{
+    width: 100%;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.parcel-img{
+    width: 90%;
+    height: 250px;
+    margin-bottom: 1em;
+}
+.parcel-img img{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+.card-outer{
+    width: 100%;
+    height: 340px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+.card-outer-img{
+    width: 100%;
+    height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card-outer-img img{
+    width: 95%;
+    height: 95%;
+}
+.card-header{
+    width: 100%;
+    height: 55px;
+    font-size: 1.5em;
+    font-weight: 600;
+    font-style: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 18px 0 0 22px;
+}
+.card-header1{
+    width: 100%;
+    height: 55px;
+    font-size: 1.5em;
+    font-weight: 600;
+    font-style: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 15px 0 0 0;
+    text-align: center;
+}
+.card-img{
+    width: 88%;
+    height: 300px;
+    margin-left: 22px;
+}
+.card-img img{
+    width: 100%;
+    height: 100%;
+}
+.card-btn{
+    width: 90%;
+    height: 30px;
+    background-color: transparent;
+    margin: 15px 0 0 20px;
+    text-align: left;
+    border: none;
+    outline: none;
+    color: blue;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+}
+.card-btn:hover{
+    color: red;
+}
+.sign-in-btn{
+    width: 90%;
+    height: 45px;
+    background-color: #ddd;
+    color: black;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 600;
+    font-family: 'Poppins',sans-serif;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin: 1em;
+    cursor: pointer;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.card-price-deal{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.price-deal{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    font-size: 1.15em;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    padding: 3px;
+}
+.price-deal-save{
+    width: 100%;
+    height: auto;
+    background-color: #e60000;
+    text-align: center;
+    font-size: 0.9em;
+    font-weight: 600;
+    font-family: Arial;
+    padding: 4px;
+    color: white;
+}

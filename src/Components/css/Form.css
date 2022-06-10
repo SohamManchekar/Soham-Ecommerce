@@ -1,0 +1,325 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.update-profile-form-section{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 3em 0;
+}
+.update-profile-form-page{
+    width: 80%;
+    height: 90%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: #e6e6e6;
+    border-radius: 8px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.update-profile-form-page form{
+    width: 100%;
+    height: 100%;
+}
+.update-form{
+    width: 100%;
+    height: 100%;
+}
+.update-profile-userData{
+    width: 100%;
+    height: 120px;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.update-profile-userData img{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: 4px solid #404040;
+    margin-left: 2em;
+}
+.upd-username{
+   width: auto;
+   height: auto;
+   font-size: 2em;
+   font-weight: 600;
+   font-family: "Poppins",sans-serif;
+   color: whitesmoke;
+   margin-left: 1em;
+}
+.form-comp-upd{
+    width: 100%;
+    height: 95px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0.4em 0;
+}
+.form-input-upd{
+    width: 80%;
+    height: 45px;
+    font-size: 1.1em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    padding: 0px 8px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    color: black;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.update-form-btns{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 1em;
+}
+.upd-form-btn{
+    width: 40%;
+    height: 60%;
+    font-size: 1.2em;
+    font-weight: 600;
+    font-family: "Poppins";
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    cursor: pointer;
+}
+.form-page{
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.form-page form{
+    width: 50%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow: hidden;
+}
+.signup-page{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(149, 157, 165, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.signin-page{
+    width: 80%;
+    height: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgba(149, 157, 165, 0.2);
+    border-radius: 8px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.form-comp{
+    width: 80%;
+    height: 95px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.form-comp1{
+    width: 100%;
+    height: 95px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.form-label{
+    width: auto;
+    height: auto;
+    font-size: 1em;
+    font-weight: 600;
+    font-family: "Poppins",sans-serif;
+}
+.form-input{
+    width: 80%;
+    height: 40px;
+    font-size: 1.1em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    padding: 0px 8px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    color: black;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.form-error{
+    font-size: 1em;
+    font-family: "Poppins",sans-serif;
+    font-weight: 600;
+    width: auto;
+    height: auto;
+}
+.form-btn{
+    width: 80%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.form-btn1{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+.form-submit-btn{
+    width: 60%;
+    height: 80%;
+    background-color: black;
+    color: whitesmoke;
+    font-size: 1.4em;
+    font-weight: 500;
+    font-family: "Poppins",sans-serif;
+    text-align: center;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.signUpIn-page{
+    width: 100%;
+    height: 45px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.signUpIn-page p{
+    width: auto;
+    height: auto;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: "Poppins",sans-serif;
+}
+.UpIn-btn{
+    width: auto;
+    height: 33px;
+    background-color: whitesmoke;
+    color: black;
+    font-size: 1.2em;
+    font-family: 600;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    padding: 2px 0.8em;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    margin-left: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    cursor: pointer;
+}
+
+@media screen and (max-width : 1030px){
+    .form-page form{
+        width: 60%;
+    }
+}
+@media screen and (max-width : 840px){
+    .form-page form{
+        width: 80%;
+        height: 70%;
+    }
+    .form-comp{
+        height: 110px;
+    }
+}
+@media screen and (max-width: 770px){
+    .form-page form{
+        height: 80%;
+    }
+    .update-profile-form-page{
+        width: 90%;
+    }
+}
+@media screen and (max-width : 430px){
+    .form-page form{
+        width: 95%;
+        height: 95%;
+    }
+    .update-profile-form-section{
+        margin: 1em 0;
+    }
+    .update-profile-form-page{
+        width: 95%;
+    }
+    .update-profile-userData{
+        height: 100px;
+    }
+    .update-profile-userData img{
+        width: 45px;
+        height: 45px;
+        margin-left: 1.5em;
+    }
+    .upd-username{
+        font-size: 1.4em;
+        margin-left: 0.6em;
+    }
+    .form-input-upd{
+        width: 90%;
+    }
+    .signin-page{
+        width: 100%;
+        height: 65%;
+    }
+    .form-comp{
+        width: 100%;
+    }
+    .form-btn{
+        width: 100%;
+    }
+    .form-submit-btn{
+        width: 80%;
+        height: 80%;
+    }
+}
+@media screen and (max-width:330px){
+    .form-page{
+        height: 130vh;
+    }
+    .form-input{
+        width: 90%;
+    }
+    .form-submit-btn{
+        width: 70%;
+        height: 70%;
+        font-size: 1.2em;
+    }
+    .signUpIn-page{
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 70px;
+    }
+}

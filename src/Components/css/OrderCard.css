@@ -1,0 +1,133 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.order-body-card{
+    width: 100%;
+    height: 150px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    flex-direction: row;
+}
+.order-body-card-img{
+    width: 200px;
+    height: 100%;
+}
+.order-body-card-img img{
+    width: 100%;
+    height: 100%;
+}
+.order-body-card-details{
+    width: 78%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.order-body-card-title{
+    width: 100%;
+    height: auto;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: "Poppins",sans-serif;
+}
+.order-body-card-mrp-price-off{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.3em;
+}
+.order-body-card-price{
+    width: auto;
+    height: auto;
+    font-size: 1.5em;
+    font-weight: lighter;
+    color: #e60000;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.order-body-card-mrp{
+    width: auto;
+    height: auto;
+    font-size: 0.85em;
+    color: #595959;
+    padding: 9px 0 0 4px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.order-body-card-discount{
+    width: auto;
+    height: auto;
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    padding: 5px 0 0 5px;
+}
+.order-body-card-qty{
+    width: auto;
+    height: auto;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: "Poppins",sans-serif;
+    color: black;
+    padding-left: 0.2em;
+}
+
+
+@media screen and (max-width: 840px){
+   .order-body-card-title{
+       padding-left: 0.5em;
+   }
+   .order-body-card-qty{
+       padding-left: 0.4em;
+   }
+}
+
+@media screen and (max-width: 430px){
+    .order-body-card{
+        height: 145px;
+    }
+    .order-body-card-title{
+        font-size: 0.75em;
+        padding-left: 0.3em;
+        color: black;
+    }
+    .order-body-card-price{
+        font-size: 1.2em;
+    }
+    .order-body-card-mrp{
+        font-size: 0.72em;
+    }
+    .order-body-card-discount{
+        font-size: 0.8em;
+        padding: 5px 0 0 5px;
+    }
+    .order-body-card-qty{
+        font-size: 0.85em;
+    }
+ }
+
+ @media screen and (max-width:395px){
+     .order-body-card-title{
+         font-size: 0.7em;
+     }
+ }
+
+ @media screen and (max-width:365px){
+     .order-body-card{
+         height: 140px;
+     }
+     .order-body-card-title{
+         font-size: 0.65em;
+     }
+     .order-body-card-price{
+         font-size: 1.1em;
+     }
+     .order-body-card-mrp{
+         font-size: 0.7em;
+     }
+     .order-body-card-discount{
+         font-size: 0.78em;
+         padding: 2px 0 0 4px;
+     }
+}

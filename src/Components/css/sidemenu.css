@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&family=Tapestry&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.side-menu{
+    width: 400px;
+    height: 100vh;
+    top: 0;
+    left: -400px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: whitesmoke;
+    transition: 0.5s;
+}
+.side-menu-header{
+    width: 100%;
+    height: 60px;
+    background: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    padding: 0px 5px;
+}
+.user-img{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+.user-img img{
+    width: 100%;
+    height: 100%;
+}
+.side-menu-header p{
+    font-size: 1.3em;
+    font-weight: 600;
+    color: black;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+}
+.close-btn{
+    width: 45px;
+    height: 45px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.5em;
+    padding-left: 2px;
+    padding-top: 5px;
+    cursor: pointer;
+}
+.lists{
+    width: 100%;
+    height: 95vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+.list{
+    width: 100%;
+    height: auto;
+    padding-bottom: 30px;
+}
+.separator-line{
+   border-top: 1px solid #ccc;
+}
+.list p{
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 8px;
+    font-size: 1.5em;
+    font-weight: 600;
+    font-style: normal;
+    font-family: "Poppins",sans-serif;
+    margin: 0.5em 0;
+    color: black;
+}
+.list ul{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.list ul li{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    margin-top: 5px;
+    color: black;
+    font-family: "Poppins";
+}
+.list ul li:hover{
+    background-color: #ddd;
+}
+.content{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 8%;
+}
+.sub-content{
+    width: auto;
+    height: auto;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+.arrow{
+ width: 40px;
+ height: 40px;
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+ align-items: center;
+ font-size: 1.2em;
+ background-color: transparent;
+ border: none;
+ outline: none;
+ cursor: pointer;
+}
+
+@media screen and (max-width: 450px){
+    .side-menu{
+        width: 350px;
+    }
+    .side-menu-header p{
+        font-size: 0.9em;
+        padding: 3px;
+    }
+}

@@ -1,0 +1,109 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.footer{
+    width: 100%;
+    height: 280px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.row{
+    width: 80%;
+    height: 75%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.col{
+    width: 24%;
+    height: 100%;
+}
+.col ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+.col div{
+    width: 100%;
+    height: auto;
+    font-size: 1.4em;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    margin: 8px 0;
+    text-align: left;
+}
+.col ul li{
+    width: 100%;
+    height: auto;
+    font-size: 1.1em;
+    font-weight: 400;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    padding: 7px 0;
+}
+.col ul li a{
+    text-decoration: none;
+    color: #ccc;
+    list-style: none;
+    transition: 0.3s;
+}
+.col ul li a:hover{
+    text-decoration: underline 1px solid whitesmoke;
+}
+.copright{
+    width: 100%;
+    height: 50px;
+    color: #ccc;
+    font-size: 1em;
+    font-weight: 400;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    padding-top: 1.5em;
+}
+
+@media screen and (max-width:600px){
+   .row{
+       width: 100%;
+   }
+   .col div{
+       font-size: 1.3em;
+   }
+   .col ul li{
+       font-size: 1em;
+   }
+}
+
+@media screen and (max-width: 470px){
+    .footer{
+        height: 250px;
+    }
+    .col div{
+        font-size: 1em;
+    }
+    .col ul li{
+        font-size: 0.8em;
+    }
+    .copright{
+        font-size: 0.9em;
+    }
+}
+
+@media screen and (max-width: 430px){
+    .col div{
+        font-size: 0.9em;
+    }
+    .col ul li{
+        font-size: 0.73em;
+    }
+    .copright{
+        font-size: 0.8em;
+    }
+}

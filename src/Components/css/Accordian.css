@@ -1,0 +1,201 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.accordian-section{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    overflow: hidden;
+}
+.accordian-display-head{
+    width: 100%;
+    height: 100px;
+}
+.order-id{
+    width: auto;
+    height: auto;
+    font-size: 1.6em;
+    font-weight: 600;
+    font-family: "Poppins",sans-serif;
+    color: #404040;
+}
+.order-status{
+    width: auto;
+    height: auto;
+    font-size: 1.5em;
+    font-family: "Poppins",sans-serif;
+    font-weight: 600;
+    padding-top: 9px;
+    margin: auto;
+}
+.order-details-section{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.order-product-list{
+    width: 90%;
+    height: auto;
+    margin: 0.5em 0;
+}
+.order-product-list ul{
+  list-style: none;
+}
+.order-product-list ul li{
+    width: 100%;
+    height: auto;
+    margin: 0.7em 0;
+}
+.order-other-details{
+    width: 100%;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+}
+.total-items-payment{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3em 1em;
+}
+.total-items-payment p{
+    width: 50%;
+    font-size: 1.5em;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.orderDate-deliveryDate{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3em 1em;
+}
+.orderDate-deliveryDate p{
+    width: 50%;
+    font-size: 0.8em;
+    font-weight: 600;
+    font-family: "Poppins",sans-serif;
+    color: #333;
+}
+.paymentType-shippingCharges{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3em 1em;
+}
+.paymentType-shippingCharges p{
+    width: 50%;
+    font-size: 1em;
+    font-weight: 600;
+    font-family: "Poppins",sans-serif;
+    color: #1a1a1a;
+}
+.cancel-order-btn{
+    width: 40px;
+    height: 40px;
+    background-color: #e6e6e6;
+    color: black;
+    font-size: 1.5em;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    padding: 5px 0 0 0;
+    margin-top: 0.2em;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 840px){
+    .order-id{
+        font-size: 1.4em;
+    }
+    .order-status{
+        font-size: 1.3em;
+    }
+}
+
+@media screen and (max-width: 800px){
+   .order-product-list{
+       width: 98%;
+   }
+}
+
+@media screen and (max-width: 430px){
+    .order-product-list{
+        width: 100%;
+    }
+    .order-id{
+        font-size: 0.75em;
+        padding-top: 0.6em;
+    }
+    .order-status{
+        font-size: 0.7em;
+        padding-top: 1em;
+    }
+    .total-items-payment{
+        padding: 0.2em;
+    }
+    .total-items-payment p{
+        font-size: 1em;
+    }
+    .orderDate-deliveryDate{
+        padding: 0.2em;
+    }
+    .orderDate-deliveryDate p{
+        font-size: 0.72em;
+        font-weight: 500;
+    }
+    .paymentType-shippingCharges{
+        padding: 0.2em;
+    }
+    .paymentType-shippingCharges p{
+        font-size: 0.72em;
+    }
+ }
+
+@media screen and (max-width:395px){
+     .order-id{
+         font-size: 0.8em;
+         padding-top: 0.5em;
+     }
+     .cancel-order-btn{
+         width: 35px;
+         height: 35px;
+         font-size: 1.4em;
+         margin-top: 0.5em;
+     }
+     .total-items-payment p{
+         font-size: 0.9em;
+     }
+     .paymentType-shippingCharges p{
+         font-size: 0.78em;
+     }
+}
+
+@media screen and (max-width:365px){
+    .total-items-payment p{
+        font-size: 0.83em;
+    }
+    .orderDate-deliveryDate p{
+        font-size: 0.7em;
+    }
+    .paymentType-shippingCharges p{
+        font-size: 0.75em;
+    }
+}

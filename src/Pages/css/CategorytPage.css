@@ -1,0 +1,232 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.product-page{
+    width: 100%;
+    height: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.products-lists{
+    width: 95%;
+    height: 100%;
+    background-color: white;
+}
+.products-lists ul{
+    list-style: none;
+}
+.products-lists ul li{
+    width: 100%;
+    height: 250px;
+    margin: 20px 0;
+    overflow: hidden;
+    cursor: pointer;
+}
+.your-order-btn1{
+    width: 180px;
+    height: 40px;
+    background-color: black;
+    color: white;
+    font-size: 0.85em;
+    font-family: "Poppins",sans-serif;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    padding: 5px;
+    margin: 0 2em;
+    cursor: pointer;
+}
+/* css for each product in category page */
+.categoy-product-body{
+    width: 100%;
+    height: 100%;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+}
+.category-product-img{
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.category-product-img img{
+    width: 95%;
+    height: 95%;
+}
+.categoy-product-detail{
+    width: 75%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.category-product-title{
+    width: 100%;
+    height: auto;
+    padding: 3px;
+    font-size: 1.4em;
+    font-weight: 600;
+    font-family: "Poppins";
+    color: black;
+}
+.category-product-star-rating{
+    width: auto;
+    height: auto;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.2em;
+}
+.category-star-size{
+    color: orange;
+    font-size: 1.4em;
+}
+.category-star-rating{
+    font-size: 1em;
+    color: #595959;
+    padding: 5px 0 0 5px;
+    text-decoration: underline;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.category-product-mrp-price-off{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.3em;
+}
+.category-product-price{
+    width: auto;
+    height: auto;
+    font-size: 1.5em;
+    font-weight: lighter;
+    color: #e60000;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.category-product-mrp{
+    width: auto;
+    height: auto;
+    font-size: 0.85em;
+    color: #595959;
+    padding: 9px 0 0 4px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.category-product-discount{
+    width: auto;
+    height: auto;
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    padding: 5px 0 0 5px;
+}
+.categoy-product-delivery-date{
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+.category-product-delivery-state{
+    width: auto;
+    height: auto;
+    font-size: 1em;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 1px 3px;
+    color: #595959;
+}
+.loading{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+/* css for other devices */
+
+@media screen and (max-width:1100px){
+    .category-product-title{
+        font-size: 1.2em;
+    }
+    .category-product-img{
+        width: 30%;
+    }
+    .categoy-product-detail{
+        width: 70%;
+    }
+    .category-product-star-rating{
+        padding: 2px;
+        margin-top: 0;
+    }
+    .category-product-mrp-price-off{
+        padding: 2px;
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width:800px){
+  .category-product-title{
+      font-size: 1.1em;
+  }
+}
+
+@media screen and (max-width:450px){
+    .products-lists{
+        width: 100%;
+    }
+    .products-lists ul li{
+        height: 230px;
+        margin: 10px 0;
+    }
+    .category-product-img{
+        width: 40%;
+    }
+    .categoy-product-detail{
+        width: 60%;
+    }
+    .category-product-title{
+        font-size: 0.9em;
+    }
+    .category-star-size{
+        font-size: 0.9em;
+    }
+    .category-star-rating{
+        font-size: 0.9em;
+        padding: 0 0 0 5px;
+    }
+    .category-product-price{
+        font-size: 1.3em;
+    }
+    .category-product-mrp{
+        font-size: 0.8em;
+    }
+    .category-product-discount{
+        font-size: 0.9em;
+    }
+    .your-order-btn1{
+        width: 130px;
+        font-size: 0.9em;
+    }
+  }
+
+@media screen and (max-width:370px){
+    .products-lists ul li {
+        height: 200px;
+    }
+    .category-product-title{
+        font-size: 0.73em;
+    }
+    .category-product-delivery-state{
+        font-size: 0.85em;
+    }
+}

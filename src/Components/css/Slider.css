@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&family=Tapestry&display=swap');
+.swiper {
+    width: 100%;
+    height: 91vh;
+}
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+}
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.slider-content{
+  width: 35vw;
+  height: auto;
+  top: 10%;
+  left: 5%;
+  position: absolute;
+  padding: 5px;
+}
+.slider-title{
+ width: auto;
+ height: auto;
+ color: black;
+ font-size: 4em;
+ font-weight: 800;
+ font-family: 'Poppins', sans-serif;
+}
+.slider-desc{
+  width: auto;
+  height: auto;
+  color: white;
+ font-size: 1.7em;
+ font-weight: 600;
+ font-family: 'Poppins', sans-serif;
+}
+.slider-discount{
+  width: auto;
+  height: auto;
+  font-size: 6em;
+  font-weight: 800;
+  color: black;
+  font-family: 'Poppins',sans-serif;
+}
+.slider-view-more{
+  width: 120px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.slider-btn{
+  width: 120px;
+  height: 40px;
+  background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
+  color: black;
+  border: none;
+  border-radius: 10px 0;
+  outline: none;
+  font-size: 1.2em;
+  font-weight: 600;
+  font-family: "Poppins",sans-serif;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+/* css for other devices */
+@media screen and (max-width: 1024px){
+  .slider-content{
+    width: 45vw;
+  }
+}
+
+@media screen and (max-width: 830px){
+  .slider-content{
+    width: 52vw;
+  }
+  .slider-title{
+    font-size: 3.7em;
+  }
+  .slider-desc{
+    font-size: 1.6em;
+  }
+  .slider-discount{
+    font-size: 5.5em;
+  }
+  .slider-view-more{
+    width: 110px;
+    height: 35px;
+  }
+  .slider-btn{
+    width: 110px;
+    height: 35px;
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 720px){
+  .slider-title{
+    font-size: 3em;
+  }
+  .slider-desc{
+    font-size: 1.4em;
+  }
+  .slider-discount{
+    font-size: 5em;
+  }
+}
+
+@media screen and (max-width: 620px){
+  .slider-title{
+    font-size: 2.3em;
+  }
+  .slider-desc{
+    font-size: 1.3em;
+  }
+  .slider-discount{
+    font-size: 4em;
+  }
+}
+
+@media screen and (max-width: 430px){
+  .swiper{
+    height: 40vh;
+  }
+  .slider-title{
+    font-size: 1.3em;
+  }
+  .slider-desc{
+    font-size: 0.8em;
+    font-weight: 500;
+  }
+  .slider-discount{
+    font-size: 2.3em;
+  }
+  .slider-view-more{
+    width: 80px;
+    height: 22px;
+  }
+  .slider-btn{
+    width: 80px;
+    height: 22px;
+    font-size: 0.7em;
+  }
+}
