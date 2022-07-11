@@ -7,4 +7,4 @@
 
 🔴 Project duration : 3weeks 2days
 
-🔴 Payment integration work in progress
+🔴 Payment integration included
