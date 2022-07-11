@@ -9,6 +9,8 @@ import { Backdrop } from "@mui/material";
 import {GrLocation} from "react-icons/gr";
 import {ImTruck} from "react-icons/im";
 import { toast } from 'react-toastify';
+import {BsFillCreditCardFill} from "react-icons/bs"
+import swal from 'sweetalert';
 import moment from "moment";
 import "../Components/css/ProceedCard.css";
 import "./css/CartPage.css";
@@ -21,6 +23,7 @@ const CartPage = () => {
   const [user, setUser] = useState()
   const [uid, setUid] = useState()
   const [open, setOpen] = useState(false)
+  const [open1, setOpen1] = useState(false) 
   const [userInfo, setUserInfo] = useState({})  // get user information if exists
 
 
@@ -66,9 +69,15 @@ const CartPage = () => {
 const proceedToCheckout = () => {
   if(user){
      if(userCart.length === 0){
-       toast.warn("No Products in Cart",{autoClose:2500})
+       toast.warn("No Products in Cart",{autoClose:2000})
      } else if(userInfo.Address === "" || userInfo.City === "" || userInfo.Town === "" || userInfo.Pincode === ""){
-       toast.info("Update Your Profile",{autoClose:2500})
+       toast.warn("Update Your Profile",{autoClose:2000})
+       setTimeout(() => {
+        toast.info("Redirecting to Update Profile",{autoClose:2000})
+       }, 2300);
+       setTimeout(() => {
+         navigate("/UpdateProfile")
+       }, 5000);
      } else{
        setOpen(true)
      }
@@ -93,8 +102,92 @@ const handleDeleteCart = async () =>{
   })
 }
 
+const handleConfirmation = () =>{
+  swal({
+    title: "Order Confirmation",
+    text: "This message is related to confirm your order.Click OK to confirm.",
+    icon: "info",
+    buttons: true,
+    successMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+       handleCheckoutProcess("Cash on Delivery","Cash Only")
+    } else {
+      setOpen(true)
+    }
+  });
+}
+
+// payment done via online transaction and note the condition to user before making payment
+const handlePaymentNote = () =>{
+  setOpen1(true)
+} 
+
+const handlePaymentNoteClose = () =>{
+   setOpen1(false)
+}
+
+const proceedToPayment = () =>{
+  setOpen1(false)
+  const data = {
+    amount : TotalCartPrice,
+    items: TotalCartQty,
+    name: userInfo.FirstName+" "+userInfo.LastName,
+    email : userInfo.EmailID,
+    address : userInfo.Address+","+userInfo.Town+","+userInfo.City+"-"+ userInfo.Pincode,
+  }
+      const options = {
+        "key": process.env.REACT_APP_RAZORPAY_TEST_KEY_ID,
+        "key_secret" : process.env.REACT_APP_RAZORPAY_TEST_KEY_SECRET_ID,
+        "amount": data.amount * 100,
+        "currency": "INR",
+        "name": "Soham",
+        "description": "No real money is used.",
+        "image":"https://www.freepnglogos.com/uploads/shopping-bag-png/shopping-bag-shopping-bags-transparent-png-svg-vector-8.png",
+        handler : function (response){
+            const orderData = {
+                Payment_id : response.razorpay_payment_id,
+                Order_items: data.items,
+                Order_amount : data.amount,
+                currency : "INR",
+                name: "Soham",
+                description : "Test mode transaction. No real money is used in the test mode.",
+                userInfo: {
+                    name: data.name,
+                    email : data.email,
+                    contact : "9999999999",
+                    address : data.address,
+                },
+                notes:{
+                    address : "Razorpay Corporate Office"
+                },
+                paymentStatus: "PAID",
+                createdAt : moment().format('MMMM Do YYYY, h:mm:ss a')
+            }
+
+            handleCheckoutProcess("Online Transaction",orderData)
+            toast.success("Payment Successful",{autoClose:3000})
+       },
+        "prefill": {
+            "name": data.name,
+            "email": data.email,
+            "contact": "9999999999"
+        },
+        "notes": {
+            "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+            "color": "#e6e6e6"
+        }
+       };
+
+       const pay = window.Razorpay(options);
+       pay.open()
+}
+
 // proceed to checkout if confirmation successfully
-const handleCheckoutProcess = async () =>{
+const handleCheckoutProcess = async (paymentType,PaymentDetails) =>{
    const ref = collection(db,`Users/${uid}/Orders`)
    const orderData = {
      OrderProduct : userCart,
@@ -104,7 +197,8 @@ const handleCheckoutProcess = async () =>{
      TotalItems: TotalCartQty,
      TotalPayment : TotalCartPrice,
      Status: "Not Yet Shipped",
-     PaymentType: "Cash on Delivery",
+     PaymentDetails : PaymentDetails,
+     PaymentType: paymentType,
      ShippingCharges : shippingCharges
    }
      await addDoc(ref,orderData)
@@ -143,10 +237,10 @@ const getUserCartCollections = async () => {
   useEffect(() => {
     getUserInfo()
   })
-  
+
   useEffect(() => {
     getUserCartCollections()
-  })
+  },[userCart])
   
 
   return (
@@ -207,7 +301,7 @@ const getUserCartCollections = async () => {
             </div>
               <div className="cart-checkout-button">
                 <button className='checkout-btn' onClick={() => proceedToCheckout()}>
-                    Proceed to Buy
+                    Checkout
                 </button>
               </div>
             </div>
@@ -258,12 +352,67 @@ const getUserCartCollections = async () => {
                           </p>
                         }
                         <div className="pay-options">
-                            <button className='cash-on-btn' disabled={true}>Only Cash on Delivery</button>
-                            <p style={{width:'100%',height:"auto",textAlign:'center',fontSize:"0.7em",fontFamily:"Poppins",fontWeight:'600',paddingTop:"3px",color:'black'}}>Note : Payment integration Work in progress</p>
+                          <p style={{width:'100%',height:"auto",textAlign:'center',fontSize:"1em",fontFamily:"Poppins",fontWeight:'600',paddingTop:"3px",color:'black'}}>Click to Choose a Payment Option</p>
+                            <button className='cash-on-btn' style={{ background: "linear-gradient(to right, #bdc3c7, #2c3e50)"}} onClick={() => handleConfirmation()}><p>Cash on Delivery</p></button>
+                            <button className='cash-on-btn' style={{ background: "linear-gradient(to right, #2c3e50, #bdc3c7)"}} onClick={() => handlePaymentNote()}><p>Pay Now</p> <BsFillCreditCardFill style={{fontSize:"1.5em",marginLeft:"0.5em",color:"whitesmoke"}} /></button>
+                            <Backdrop sx={{ color: '#fff',transition: "0.5s", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open1}>
+                                 <div className="info-card">
+                                    <div className="info-card-inner">
+                                    <div className="info-upper">
+                                        <h2 style={{color:"white",fontFamily:"Poppins",textAlign:"center",display:"flex"}}> <img src="https://www.freepnglogos.com/uploads/shopping-bag-png/shopping-bag-shopping-bags-transparent-png-svg-vector-8.png" alt="" style={{width:"45px",height:"45px"}} /> Payment Note</h2>
+                                        <p style={{color:"white",fontFamily:"Poppins",textAlign:"center",fontSize:'0.8em'}}><b style={{color:"white"}}>Test Mode</b>.No money is deducted from the customer's account as this is a simulated transaction.</p>
+                                        <p style={{color:"white",fontFamily:"Poppins",textAlign:"center",fontSize:"0.8em",fontWeight:"500"}}>Do not Enter your personal bank details,Be aware of Frauds make sure you Enter Fake data from below.</p>
+                                    </div>
+                                    <button style={{width:"90%",height:"auto",padding:"5px 0px",margin:"5px 0",border:"none",borderRadius:"8px",backgroundColor:'black',color:"white",fontFamily:"Poppins",textAlign:"center",fontSize:'1em',fontWeight:"600"}} disabled={true}>Payment options with details</button>
+                                    <div className="info-middle">
+                                      <div className="info-details">
+                                          <p style={{color:"black",fontFamily:"Poppins",textAlign:"center",fontSize:"0.8em",fontWeight:"600"}}>For OTP Enter Any 6 digit number or Click on Complete payment on bank page.Don't Scan QR code.Don't Change the Phone number 9999999999 keep as it is.</p>
+                                          <h3 style={{color:"black",fontFamily:"Poppins"}}>1.Netbanking</h3>
+                                          <p style={{color:"black",fontFamily:"Poppins",fontSize:"0.8em"}}>You can select any of the listed banks. After choosing a bank, Razorpay will redirect to a mock page where you can make the payment success or a failure.</p>
+                                      </div>
+                                      <div className="info-details">
+                                        <h3 style={{color:"black",fontFamily:"Poppins"}}>2.UPI</h3>
+                                        <h4 style={{color:"black",fontFamily:"Poppins"}}>You can enter one of the following UPI IDs:</h4>
+                                        <p style={{color:"black",fontFamily:"Poppins",fontSize:"0.8em"}}><b>1: </b><b style={{color:"#33cc33"}}>success@razorpay</b></p>
+                                      </div>
+                                      <div className="info-details">
+                                        <h3 style={{color:"black",fontFamily:"Poppins"}}>3.Wallet</h3>
+                                        <p style={{color:"black",fontFamily:"Poppins",fontSize:"0.8em"}}>You can select any of the listed wallets. After choosing a wallet, Razorpay will redirect to a mock page where you can make the payment success or a failure.</p>
+                                      </div>
+                                      <div className="info-details">
+                                        <h3 style={{color:"black",fontFamily:"Poppins"}}>4.Cards</h3>
+                                        <p style={{color:"black",fontFamily:"Poppins",fontSize:"0.8em"}}>You can use one of the test cards to make transactions in the Test Mode. Enter any valid future date as the expiry date and any random CVV to create a successful payment.<b> Use this Test Cards</b></p>
+                                        <table>
+                                            <tr>
+                                                <th>Card Network</th>
+                                                <th>Domestic</th>
+                                                <th>Card Number</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Mastercard</td>
+                                                <td>Domestic</td>
+                                                <td>5267 3181 8797 5449</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Visa</td>
+                                                <td>Domestic</td>
+                                                <td>4111 1111 1111 1111</td>
+                                            </tr>
+                                        </table>
+                                      </div>
+                                    </div>
+                                    <div className="info-lower">
+                                        <button style={{backgroundColor:"black",color:"white"}} onClick={() => handlePaymentNoteClose()}>Go back</button>
+                                        <button style={{backgroundColor:"white",color:"black"}} onClick={() => proceedToPayment()}>Proceed to Pay</button>
+                                    </div>
+                                    <p style={{color:"blue",fontFamily:"Poppins",fontSize:"0.8em",textAlign:"center",fontWeight:"600"}}>* If you Enter your personal bank details purposely or mistakenly , we wont be responsible for act. *</p>
+                                    </div>
+                                  </div>
+                            </Backdrop>
                         </div>
+                        <p style={{width:'100%',height:"auto",textAlign:'center',fontSize:"1em",fontFamily:"Poppins",fontWeight:'600',marginBottom:"5px",color:"black"}}>Or</p>
                         <div className="confirm-cancel">
                             <button className='conf-can-order' style={{backgroundColor:'white',color:"black"}} onClick={() => handleClose()}>Cancel</button>
-                            <button className='conf-can-order' style={{backgroundColor:'black',color:"white"}} onClick={() => handleCheckoutProcess()}>Confirm</button>
                         </div>
                     </div>
                  </div>

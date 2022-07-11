@@ -118,7 +118,7 @@ const Header = () => {
             }
           </div>
            <div className="cart">
-              <Link to="/cartpage"><button className='cart-btn'><FaOpencart/></button></Link>
+              <Link to="/CartPage"><button className='cart-btn'><FaOpencart/></button></Link>
               {
                 user ? 
                 <p>{totalCartQty}</p>

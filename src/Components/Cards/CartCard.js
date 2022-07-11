@@ -89,7 +89,7 @@ const CartCard = ({product}) => {
       </div>
       <div className="cart-card-details">
           <div className="cart-card-title-setting">
-            <div className="cart-card-title">{product.title.slice(0,130)}...</div>
+            <div className="cart-card-title">{product.title.slice(0,110)}...</div>
             <button className='setting-btn' id="basic-button" aria-controls={open ? 'basic-menu' : undefined} aria-haspopup="true" aria-expanded={open ? 'true' : undefined} onClick={handleSettingOpen}>
                 <BiDotsVerticalRounded/>
             </button>

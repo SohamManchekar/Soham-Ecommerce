@@ -57,9 +57,8 @@ const UserCard = () => {
 
       useEffect(() => {
         userAuthentication();
-        getUserInfo();
-     });
-
+       getUserInfo();
+     },[user]);
 
   return (
     <div className="my-acc-user-details">

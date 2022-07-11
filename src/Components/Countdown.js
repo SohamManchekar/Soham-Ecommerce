@@ -9,7 +9,7 @@ const Countdown = () => {
     sec: ""
   })
         // set the date 
-      const countDownDate = new Date("july 5, 2022 00:00:00").getTime();
+      const countDownDate = new Date("august 10, 2022 00:00:00").getTime();
         // Update the count down every 1 second
        const x = setInterval(function() {
             const now = new Date().getTime();
@@ -29,17 +29,17 @@ const Countdown = () => {
             min: minutes,
             sec: seconds
           })
-
-          const countdownDeal = document.getElementById("countdownDeal")
-          if(countDown.d === 0 && countDown.hr === 0 && countDown.min === 0 && countDown.sec === 0){
-            countdownDeal.innerHTML = "Expired"
-          }
                 
     }, 1000);
 
   return (
     <div className='count-down' id='countdownDeal' style={{fontSize:"0.8em",fontFamily:"Poppins",padding:"20px 2px 0 2px",fontWeight:"600",color:"red"}}>
-      {`${countDown.d}d ${countDown.hr}hr ${countDown.min}min ${countDown.sec}sec`}
+      {
+        countDown.d === 0 && countDown.hr === 0 && countDown.min === 0 && countDown.sec === 0 ?
+        "Expired"
+        :
+        `Ends in ${countDown.d}d ${countDown.hr}hr ${countDown.min}min ${countDown.sec}sec`
+      }
     </div>
   )
 }

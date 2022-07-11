@@ -57,10 +57,9 @@ useEffect(() => {
   getAuthentication()
 },[user])
 
-useEffect(() => {
+useEffect(() =>{
   getUserInfo()
 })
-
 
   return (
     <div className='card-layout'>

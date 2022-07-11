@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+img{
+    width: 80%;
+    height: 80%;
+}
+
+@media screen and (max-width: 430px){
+    img{
+        width: 100%;
+        height: 300px;
+    }
+}

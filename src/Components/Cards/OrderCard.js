@@ -9,7 +9,7 @@ const OrderCard = ({data}) => {
          <img src={data.img} alt={data.title} title={data.title} />
        </div>
        <div className="order-body-card-details">
-           <div className="order-body-card-title">{data.title.slice(0,120)}...</div>
+           <div className="order-body-card-title">{data.title.slice(0,110)}...</div>
            <div className="order-body-card-mrp-price-off">
                 <p className="order-body-card-price">₹{data.price}</p>
                 <del className="order-body-card-mrp">₹{data.MRP}</del>

@@ -16,6 +16,8 @@ import "../Components/css/Accordian.css"
 import 'react-toastify/dist/ReactToastify.css';
 import "./css/Myaccount.css"
 import { toast } from 'react-toastify';
+import { Backdrop } from '@mui/material';
+import PaymentDetails from '../Components/Cards/PaymentDetails';
 
 
 const MyAccount = () => {
@@ -23,6 +25,15 @@ const MyAccount = () => {
   const [uid, setUid] = useState()  // get user uid for user information to display to user
   const [orderCollection, setOrderCollection] = useState([])
   const [orderProductData, setOrderProductData] = useState([])
+  const [open, setOpen] = useState(false)
+
+  const handleViewPaymentDetails = () =>{
+    setOpen(true)
+  }
+
+  const handleClosePaymentDetails = () =>{
+    setOpen(false)
+  }
 
   const userAuthentication = () => {
     auth.onAuthStateChanged((user) => {
@@ -57,9 +68,20 @@ const MyAccount = () => {
 
   // delete the order 
   const handleCancelOrder = (id) =>{
+    let text = "";
+    orderCollection.map((order) => {
+      if(id === order.id){
+        if(order.PaymentType === "Online Transaction"){
+          text = "You can cancel the order day before delivery date. Click OK to cancel order. Your Dummy Money will be Refunded within 5-7 working days."
+        }else{
+           text = "You can cancel the order day before delivery date. Click OK to cancel order."
+        }
+      }
+      return text
+    })
     swal({
       title: "Order Cancellation",
-      text: "You can cancel the order day before delivery date. Click OK to cancel order",
+      text : text,
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -107,9 +129,7 @@ const MyAccount = () => {
 
  useEffect(() => {
   getUserOrderCollections(); 
- }, [uid])
- 
- 
+ }, [uid]) 
 
   return (
     <div className='my-acc'>
@@ -188,7 +208,17 @@ const MyAccount = () => {
                                       <p>Delivery Date : {order.OrderDeliveryDate} (8am - 10pm)</p>
                                   </div>
                                   <div className="paymentType-shippingCharges">
-                                      <p>Payment : {order.PaymentType}</p>
+                                      {
+                                        order.PaymentType === "Online Transaction" ?
+                                        <>
+                                        <p>Payment : <button style={{width:"auto",height:"auto",backgroundColor:"black",color:"white",border:"none",borderRadius:"5px",fontSize:"1em",fontWeight:"500",padding:"3px 10px",cursor:"pointer"}} onClick={() => handleViewPaymentDetails()}>View</button></p>
+                                        <Backdrop sx={{ color: '#fff',transition: "0.5s", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open}>
+                                          <PaymentDetails close={handleClosePaymentDetails} data={order.PaymentDetails} />
+                                        </Backdrop>
+                                        </>
+                                        :
+                                        <p>Payment : {order.PaymentType}</p>
+                                      }
                                       {
                                         order.TotalPayment > 1000 ?
                                         <p>Shipping Charges : {order.ShippingCharges}</p>

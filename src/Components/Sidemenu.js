@@ -54,12 +54,8 @@ const Sidemenu = () => {
 
   useEffect(() => {
      userAuthentication();
+     getUserInfo();
   },[user]);
-
-  useEffect(() => {
-    getUserInfo();
-  })
-  
   
 
   const shopByCategory = ["DinningTable","Headphones","HomeDecor","HomeFurnishing","Laptop","MensClothes","Phones","SmartWatch","Sunglasses","WomensClothes","Tv"]

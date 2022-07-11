@@ -43,7 +43,7 @@
     cursor: pointer;
 }
 /* css for each product in category page */
-.categoy-product-body{
+.category-product-body{
     width: 100%;
     height: 100%;
     background-color: whitesmoke;
@@ -62,7 +62,7 @@
     width: 95%;
     height: 95%;
 }
-.categoy-product-detail{
+.category-product-detail{
     width: 75%;
     height: 100%;
     display: flex;
@@ -128,7 +128,7 @@
     color: black;
     padding: 5px 0 0 5px;
 }
-.categoy-product-delivery-date{
+.category-product-delivery-date{
     width: auto;
     height: auto;
     display: flex;
@@ -161,7 +161,7 @@
     .category-product-img{
         width: 30%;
     }
-    .categoy-product-detail{
+    .category-product-detail{
         width: 70%;
     }
     .category-product-star-rating{
@@ -191,7 +191,7 @@
     .category-product-img{
         width: 40%;
     }
-    .categoy-product-detail{
+    .category-product-detail{
         width: 60%;
     }
     .category-product-title{

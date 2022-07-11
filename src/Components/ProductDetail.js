@@ -1,6 +1,7 @@
 import React, { useState , useEffect} from "react";
 import { Link, useParams , useNavigate} from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
+import {BsFillCreditCardFill} from "react-icons/bs"
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -14,6 +15,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { Backdrop } from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
 import moment from "moment";
+import swal from "sweetalert";
 import db from "../Backend/firebase/config";
 import { auth } from "../Backend/firebase/config";
 import { collection, getDoc, query, where, doc, setDoc, getDocs,addDoc} from 'firebase/firestore';
@@ -21,17 +23,17 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import "../Components/css/ProductDetail.css";
 import "../Components/css/ProceedCard.css";
-
+import "../Components/css/infoCard.css"
 
 
 const ProductDetail = () => {
-
 const {id,category} = useParams();
 const navigate = useNavigate();
 const [productDetailData, setProductDetailData] = useState({})
 const [recommendedCategoryData, setRecommendedCategoryData] = useState([])
 const [description, setDescription] = useState([])
 const [open, setOpen] = useState(false)
+const [open1, setOpen1] = useState(false)
 
 
  // get the discount amount
@@ -77,9 +79,6 @@ const getTotalPrice = discountAmount * quantity > 1000 ? discountAmount * quanti
 // add to cart functionality
 const addToCart = async (item) =>{
   if(user){
-      if(userInfo.Address === "" || userInfo.City === "" || userInfo.Town === "" || userInfo.Pincode === ""){
-        toast.error("Update Your profile first",{autoClose:2500})
-      } else {
         await setDoc(doc(db,`Users/${uid}/Cart`,id),{
           title: item.title,
           img: item.img,
@@ -96,7 +95,6 @@ const addToCart = async (item) =>{
         .catch((err) => {
           toast.error(err.message);
         })
-     }
   }
     else{
       toast.error("Sign in first",{autoClose:1500})
@@ -113,12 +111,18 @@ const addToCart = async (item) =>{
 const buyNow = () => {
   if(user){
     if(userInfo.Address === "" || userInfo.City === "" || userInfo.Town === "" || userInfo.Pincode === ""){
-      toast.error("Update Your profile first",{autoClose:2500})
+      toast.error("Update Your profile first",{autoClose:2000})
+      setTimeout(() => {
+        toast.info("Redirecting to Update profile",{autoClose:2000})
+      }, 2000);
+      setTimeout(() => {
+        navigate("/UpdateProfile")
+      }, 4500);
     } else{
-        toast.success("Proceeding to checkout",{autoClose:2000})
+        toast.success("Proceeding to Checkout",{autoClose:2000})
         setTimeout(() => {
           setOpen(true)
-        }, 2500);
+        }, 2800);
     }
  } else{
   toast.error("Sign in first",{autoClose:1500})
@@ -132,8 +136,93 @@ const buyNow = () => {
  }
 }
 
+// confirm prompt box to confirm the order
+const handleConfirmation = () =>{
+  swal({
+    title: "Order Confirmation",
+    text: "This message is related to confirm your order.Click OK to confirm.",
+    icon: "info",
+    buttons: true,
+    successMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+       handleCheckoutProcess("Cash on Delivery","Cash Only")
+    } else {
+      setOpen(true)
+    }
+  });
+}
+
+// payment done via online transaction and note the condition to user before making payment
+const handlePaymentNote = () =>{
+  setOpen1(true)
+} 
+
+const handlePaymentNoteClose = () =>{
+   setOpen1(false)
+}
+
+const proceedToPayment = () =>{
+  setOpen1(false)
+  const data = {
+    amount : getTotalPrice,
+    items: quantity,
+    name: userInfo.FirstName+" "+userInfo.LastName,
+    email : userInfo.EmailID,
+    address : userInfo.Address+","+userInfo.Town+","+userInfo.City+"-"+ userInfo.Pincode,
+  }
+      const options = {
+        "key": process.env.REACT_APP_RAZORPAY_TEST_KEY_ID,
+        "key_secret" : process.env.REACT_APP_RAZORPAY_TEST_KEY_SECRET_ID,
+        "amount": data.amount * 100,
+        "currency": "INR",
+        "name": "Soham",
+        "description": "No real money is used.",
+        "image":"https://www.freepnglogos.com/uploads/shopping-bag-png/shopping-bag-shopping-bags-transparent-png-svg-vector-8.png",
+        handler : function (response){
+            const orderData = {
+                Payment_id : response.razorpay_payment_id,
+                Order_items: data.items,
+                Order_amount : data.amount,
+                currency : "INR",
+                name: "Soham",
+                description : "Test mode transaction. No real money is used in the test mode.",
+                userInfo: {
+                    name: data.name,
+                    email : data.email,
+                    contact : "9999999999",
+                    address : data.address,
+                },
+                notes:{
+                    address : "Razorpay Corporate Office"
+                },
+                paymentStatus: "PAID",
+                createdAt : moment().format('MMMM Do YYYY, h:mm:ss a')
+            }
+
+            handleCheckoutProcess("Online Transaction",orderData)
+            toast.success("Payment Successful",{autoClose:3000})
+       },
+        "prefill": {
+            "name": data.name,
+            "email": data.email,
+            "contact": "9999999999"
+        },
+        "notes": {
+            "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+            "color": "#e6e6e6"
+        }
+       };
+
+       const pay = window.Razorpay(options);
+       pay.open()
+}
+
 // proceed to checkout if confirmation successfully
-const handleCheckoutProcess = async () =>{
+const handleCheckoutProcess = async (paymentType,PaymentDetails) =>{
   const itemData = {
     title: productDetailData.title,
     img: productDetailData.img,
@@ -154,8 +243,9 @@ const handleCheckoutProcess = async () =>{
     TotalItems: itemData.qty,
     TotalPayment : itemData.TotalPrice,
     Status: "Not Yet Shipped",
-    PaymentType: "Cash on Delivery",
-    ShippingCharges : shippingCharges
+    PaymentDetails : PaymentDetails,
+    PaymentType: paymentType,
+    ShippingCharges : shippingCharges,
   }
     await addDoc(ref,orderData)
     .then(() => {
@@ -206,15 +296,14 @@ useEffect(() => {
   userAuthentication()
 },[user])
 
-useEffect(() => {
+useEffect(() =>{
+  getSingleDoc()
   getUserInfo()
 })
 
-
 useEffect(() => {
-  getSingleDoc()
   getRecommendedCategoryListsData()
-})
+},[])
 
 
   const RDWS = [
@@ -459,15 +548,70 @@ useEffect(() => {
                           </p>
                         }
                         <div className="pay-options">
-                            <button className='cash-on-btn' disabled={true}>Only Cash on Delivery</button>
-                            <p style={{width:'100%',height:"auto",textAlign:'center',fontSize:"0.7em",fontFamily:"Poppins",fontWeight:'600',paddingTop:"3px",color:'black'}}>Note : Payment integration Work in progress</p>
+                          <p style={{width:'100%',height:"auto",textAlign:'center',fontSize:"1em",fontFamily:"Poppins",fontWeight:'600',paddingTop:"3px",color:'black'}}>Click to Choose a Payment Option</p>
+                            <button className='cash-on-btn' style={{ background: "linear-gradient(to right, #bdc3c7, #2c3e50)"}} onClick={() => handleConfirmation()}><p>Cash on Delivery</p></button>
+                            <button className='cash-on-btn' style={{ background: "linear-gradient(to right, #2c3e50, #bdc3c7)"}} onClick={() => handlePaymentNote()}><p>Pay Now</p> <BsFillCreditCardFill style={{fontSize:"1.5em",marginLeft:"0.5em",color:"whitesmoke"}} /></button>
+                            <Backdrop sx={{ color: '#fff',transition: "0.5s", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open1}>
+                                 <div className="info-card">
+                                    <div className="info-card-inner">
+                                    <div className="info-upper">
+                                        <h2 style={{color:"white",fontFamily:"Poppins",textAlign:"center",display:"flex"}}> <img src="https://www.freepnglogos.com/uploads/shopping-bag-png/shopping-bag-shopping-bags-transparent-png-svg-vector-8.png" alt="" style={{width:"45px",height:"45px"}} /> Payment Note</h2>
+                                        <p style={{color:"white",fontFamily:"Poppins",textAlign:"center",fontSize:'0.8em'}}><b style={{color:"white"}}>Test Mode</b>.No money is deducted from the customer's account as this is a simulated transaction.</p>
+                                        <p style={{color:"white",fontFamily:"Poppins",textAlign:"center",fontSize:"0.8em",fontWeight:"500"}}>Do not Enter your personal bank details,Be aware of Frauds make sure you Enter Fake data from below.</p>
+                                    </div>
+                                    <button style={{width:"90%",height:"auto",padding:"5px 0px",margin:"5px 0",border:"none",borderRadius:"8px",backgroundColor:'black',color:"white",fontFamily:"Poppins",textAlign:"center",fontSize:'1em',fontWeight:"600"}} disabled={true}>Payment options with details</button>
+                                    <div className="info-middle">
+                                      <div className="info-details">
+                                          <p style={{color:"black",fontFamily:"Poppins",textAlign:"center",fontSize:"0.8em",fontWeight:"600"}}>For OTP Enter Any 6 digit number or Click on Complete payment on bank page.Don't Scan QR code.Don't Change the Phone number 9999999999 keep as it is.</p>
+                                          <h3 style={{color:"black",fontFamily:"Poppins"}}>1.Netbanking</h3>
+                                          <p style={{color:"black",fontFamily:"Poppins",fontSize:"0.8em"}}>You can select any of the listed banks. After choosing a bank, Razorpay will redirect to a mock page where you can make the payment success or a failure.</p>
+                                      </div>
+                                      <div className="info-details">
+                                        <h3 style={{color:"black",fontFamily:"Poppins"}}>2.UPI</h3>
+                                        <h4 style={{color:"black",fontFamily:"Poppins"}}>You can enter one of the following UPI IDs:</h4>
+                                        <p style={{color:"black",fontFamily:"Poppins",fontSize:"0.8em"}}><b>1: </b><b style={{color:"#33cc33"}}>success@razorpay</b></p>
+                                      </div>
+                                      <div className="info-details">
+                                        <h3 style={{color:"black",fontFamily:"Poppins"}}>3.Wallet</h3>
+                                        <p style={{color:"black",fontFamily:"Poppins",fontSize:"0.8em"}}>You can select any of the listed wallets. After choosing a wallet, Razorpay will redirect to a mock page where you can make the payment success or a failure.</p>
+                                      </div>
+                                      <div className="info-details">
+                                        <h3 style={{color:"black",fontFamily:"Poppins"}}>4.Cards</h3>
+                                        <p style={{color:"black",fontFamily:"Poppins",fontSize:"0.8em"}}>You can use one of the test cards to make transactions in the Test Mode. Enter any valid future date as the expiry date and any random CVV to create a successful payment.<b> Use this Test Cards</b></p>
+                                        <table>
+                                            <tr>
+                                                <th>Card Network</th>
+                                                <th>Domestic</th>
+                                                <th>Card Number</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Mastercard</td>
+                                                <td>Domestic</td>
+                                                <td>5267 3181 8797 5449</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Visa</td>
+                                                <td>Domestic</td>
+                                                <td>4111 1111 1111 1111</td>
+                                            </tr>
+                                        </table>
+                                      </div>
+                                    </div>
+                                    <div className="info-lower">
+                                        <button style={{backgroundColor:"black",color:"white"}} onClick={() => handlePaymentNoteClose()}>Go back</button>
+                                        <button style={{backgroundColor:"white",color:"black"}} onClick={() => proceedToPayment()}>Proceed to Pay</button>
+                                    </div>
+                                    <p style={{color:"blue",fontFamily:"Poppins",fontSize:"0.8em",textAlign:"center",fontWeight:"600"}}>* If you Enter your personal bank details purposely or mistakenly , we wont be responsible for act. *</p>
+                                    </div>
+                                  </div>
+                            </Backdrop>
                         </div>
+                        <p style={{width:'100%',height:"auto",textAlign:'center',fontSize:"1em",fontFamily:"Poppins",fontWeight:'600',marginBottom:"5px",color:"black"}}>Or</p>
                         <div className="confirm-cancel">
                             <button className='conf-can-order' style={{backgroundColor:'white',color:"black"}} onClick={() => handleClose()}>Cancel</button>
-                            <button className='conf-can-order' style={{backgroundColor:'black',color:"white"}} onClick={() => handleCheckoutProcess()}>Confirm</button>
                         </div>
                     </div>
-                 </div>
+                  </div>
                </Backdrop>
           </div>
           <div className="product-detail-RDWS">
@@ -512,5 +656,6 @@ useEffect(() => {
     </> 
   );
 };
+
 
 export default ProductDetail;

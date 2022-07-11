@@ -8,10 +8,10 @@ const Product = ({product}) => {
 
     const discountAmount = product.MRP - ((product.MRP * product.discount) / 100).toFixed();
   return (
-    <div className='categoy-product-body'>
+    <div className='category-product-body'>
         <div className="category-product-img"><img src={product.img} alt="" /></div>
-        <div className="categoy-product-detail">
-            <div className="category-product-title">{product.title.slice(0,140)}...</div>
+        <div className="category-product-detail">
+            <div className="category-product-title">{product.title.slice(0,100)}...</div>
             <div className="category-product-star-rating">
               <FaStar className='category-star-size'/>
               <FaStar className='category-star-size'/>

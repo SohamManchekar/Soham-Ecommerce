@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.pay-det-card{
+    width: 350px;
+    height: 660px;
+    background-color: whitesmoke;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.pay-det-close{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    background-color: #e6e6e6;
+}
+.pay-det-close button{
+    width: 45px;
+    height: 45px;
+    background-color: transparent;
+    color: black;
+    font-size: 1.6em;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 3px 0 0 4px;
+}
+.pay-det-upper{
+    width: 100%;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #e6e6e6;
+}
+.pay-det-upper img{
+    width: 45px;
+    height: 45px;
+}
+.pay-det-upper h1{
+    font-size: 1.8em;
+    color: black;
+    font-family: "Poppins",sans-serif;
+}
+.pay-det-sec{
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.pay-det-sec h1{
+    font-size: 1.5em;
+    font-family: "Poppins",sans-serif;
+    color: black;
+    padding: 3px 0;
+}
+.pay-det-start{
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    padding: 5px 3px;
+}
+.pay-det-start span{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 2px 0;
+}
+.pay-det-start p,b{
+    width: 50%;
+    height: auto;
+    font-size: 1em;
+    color: black;
+}
+.pay-det-start p{
+    font-weight: 500;
+}
