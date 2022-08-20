@@ -5,6 +5,4 @@
 # Description
 🔴 This Project is made with ReactJs and Firebase
 
-🔴 Project duration : 3weeks 2days
-
 🔴 Payment integration included
